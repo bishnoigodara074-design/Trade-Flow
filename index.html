@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Sovereign AI | Dashboard</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+              darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed-variant": "#004395",
+                        "tertiary": "#000000",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#001a42",
+                        "primary-fixed": "#dae2fd",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-container": "#2170e4",
+                        "on-background": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#bec6e0",
+                        "inverse-surface": "#213145",
+                        "outline-variant": "#c6c6cd",
+                        "secondary": "#0058be",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary-container": "#fefcff",
+                        "primary-container": "#131b2e",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-tint": "#565e74",
+                        "secondary-fixed": "#d8e2ff",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#eff4ff",
+                        "surface-dim": "#cbdbf5",
+                        "on-primary-container": "#7c839b",
+                        "on-surface-variant": "#45464d",
+                        "tertiary-container": "#002113",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-tertiary-container": "#009668",
+                        "surface": "#f8f9ff",
+                        "on-primary-fixed": "#131b2e",
+                        "primary": "#000000",
+                        "inverse-primary": "#bec6e0",
+                        "surface-container": "#e5eeff",
+                        "on-surface": "#0b1c30",
+                        "surface-variant": "#d3e4fe",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f8f9ff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "outline": "#76777d",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "error-container": "#ffdad6"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem", 
+                        "lg": "0.25rem", 
+                        "xl": "0.5rem", 
+                            "full": "0.75rem"
+                    },
+                    animation: {
+                        'slide-in': 'slide-in 0.3s ease-out forwards',
+                        'slide-out': 'slide-out 0.3s ease-in forwards',
+                        'fade-in': 'fade-in 0.2s ease-out forwards'
+                    },
+                    keyframes: {
+                        'slide-in': {
+                            '0%': { transform: 'translateX(100%)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        'slide-out': {
+                            '0%': { transform: 'translateX(0)', opacity: '1' },
+                            '100%': { transform: 'translateX(100%)', opacity: '0' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            transition: font-variation-settings 0.2s ease;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            min-height: max(884px, 100dvh);
+            overflow-x: hidden;
+        }
+        /* Hide scrollbar for clean UI but keep functionality */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface min-h-screen pb-24 relative">
+    
+    <!-- TopAppBar -->
+    <header class="bg-slate-50 dark:bg-slate-900 sticky top-0 z-40 transition-colors duration-300">
+        <div class="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-slate-900 dark:text-slate-100" data-icon="bubble_chart">bubble_chart</span>
+                <h1 class="text-slate-950 dark:text-white font-manrope font-extrabold tracking-tighter text-xl">Sovereign AI</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="showToast('Notifications', 'You have 3 new alerts regarding pipeline optimization.', 'notifications')" class="hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors p-2 rounded-full relative">
+                    <span class="material-symbols-outlined text-slate-900 dark:text-slate-100" data-icon="notifications">notifications</span>
+                    <span class="absolute top-1.5 right-2 w-2 h-2 bg-error rounded-full border-2 border-slate-50 dark:border-slate-900"></span>
+                </button>
+                   </div>
+        </div>
+        <div class="bg-slate-100 dark:bg-slate-800 h-[1px] w-full"></div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pt-8 pb-12 relative overflow-hidden">
+        
+        <!-- View Container 1: Dashboard (Default) -->
+        <div id="view-dashboard" class="view-section animate-fade-in block">
+            <div class="mb-10">
+                <h2 class="font-headline font-extrabold text-4xl text-on-surface tracking-tight mb-2">Dashboard</h2>
+                <p class="font-body text-on-primary-container text-sm">Real-time enterprise intelligence and orchestration.</p>
+            </div>
+
+            <!-- Summary Metrics: Asymmetric Bento Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div class="col-span-1 bg-surface-container-lowest p-6 rounded-xl shadow-[0_10px_40px_rgba(11,28,48,0.06)] flex flex-col justify-between aspect-square hover:-translate-y-1 transition-transform cursor-pointer" onclick="switchTab('view-pipelines')">
+                    <span class="font-label text-[10px] font-medium tracking-widest uppercase text-on-primary-container">Active Pipelines</span>
+                    <div>
+                        <div class="font-headline text-4xl font-extrabold text-on-surface">12</div>
+                        <div class="text-[10px] text-on-tertiary-container mt-1 font-medium bg-tertiary-fixed/30 inline-block px-2 py-0.5 rounded-full">LIVE NOW</div>
+                    </div>
+                </div>
+
+                <div class="col-span-1 bg-primary-container p-6 rounded-xl text-white flex flex-col justify-between aspect-square hover:-translate-y-1 transition-transform cursor-pointer" onclick="showToast('Compliance Check', 'Full audit passed at 08:00 AM UTC.', 'verified')">
+                    <span class="font-label text-[10px] font-medium tracking-widest uppercase text-on-primary-container">Compliance</span>
+                    <div>
+                        <div class="font-headline text-4xl font-extrabold text-white">98%</div>
+                        <div class="h-1 bg-outline-variant/20 w-full mt-4 rounded-full overflow-hidden">
+                            <div class="h-full bg-tertiary-fixed w-[98%]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-2 bg-gradient-to-br from-secondary to-secondary-container p-6 rounded-xl text-white flex flex-col justify-between hover:shadow-lg transition-shadow">
+                    <div class="flex justify-between items-start">
+                        <span class="font-label text-[10px] font-medium tracking-widest uppercase text-white/70">Cycle Time Reduction</span>
+                        <span class="material-symbols-outlined text-white/50" data-icon="speed">speed</span>
+                    </div>
+                    <div>
+                        <div class="font-headline text-5xl font-extrabold text-white">34%</div>
+                           <p class="font-body text-xs text-white/80 mt-2 font-medium">Efficiency improvement across all sectors</p>
+                    </div>
+                </div>
+
+                <div class="col-span-2 md:col-span-1 bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-between border-l-4 border-tertiary-fixed-dim hover:-translate-y-1 transition-transform">
+                    <span class="font-label text-[10px] font-medium tracking-widest uppercase text-on-primary-container">Engagement</span>
+                    <div>
+                        <div class="font-headline text-3xl font-extrabold text-on-surface">+22%</div>
+                        <div class="flex items-center gap-1 text-on-tertiary-container text-[10px] mt-1">
+                            <span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                            <span>ABOVE BENCHMARK</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden md:block col-span-3 bg-surface-container-high rounded-xl p-8 relative overflow-hidden group">
+                    <div class="relative z-10 flex h-full items-center justify-between">
+                        <div class="max-w-[60%]">
+                            <h3 class="font-headline text-xl text-on-surface mb-2">Intelligence Synthesis</h3>
+                            <p class="font-body text-sm text-on-surface-variant">Your autonomous agents have processed 1.2k assets this morning. Overall governance remains within tier-1 thresholds.</p>
+                        </div>
+                        <button onclick="simulateLoading(this, 'GENERATE REPORT', 'Generating...', () => showToast('Report Generated', 'Weekly Synthesis Report has been sent to your email.', 'picture_as_pdf'))" class="bg-secondary text-white font-label text-[10px] tracking-widest uppercase px-6 py-3 rounded-full hover:bg-secondary-container transition-colors font-bold w-40 flex justify-center items-center">
+                            GENERATE REPORT
+                        </button>
+                    </div>
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-colors"></div>
+                    <div class="absolute -left-10 -bottom-10 w-48 h-48 bg-tertiary-fixed/20 rounded-full blur-2xl group-hover:bg-tertiary-fixed/30 transition-colors"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-headline text-xl text-on-surface">Active Pipelines</h3>
+                        <span class="font-label text-[10px] font-medium tracking-widest uppercase text-on-primary-container bg-surface-container px-3 py-1 rounded-full cursor-pointer hover:bg-surface-container-high transition-colors" onclick="switchTab('view-pipelines')">VIEW ALL</span>
+                    </div>
+                        <!-- Pipeline Items -->
+                    <div onclick="showToast('Pipeline Context', 'Opening Q3 Product Launch Blog execution graph...', 'account_tree')" class="bg-surface-container-lowest p-5 rounded-xl transition-all hover:bg-white flex items-center justify-between group cursor-pointer shadow-sm hover:shadow-md border border-transparent hover:border-outline-variant/30">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined" data-icon="article">article</span>
+                            </div>
+                            <div>
+                                <h4 class="font-body font-semibold text-on-surface">Q3 Product Launch Blog</h4>
+                                <p class="text-[11px] font-medium text-on-primary-container uppercase tracking-wide">Reviewing (Human-in-the-loop)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="hidden md:flex flex-col items-end mr-4">
+                                <span class="text-[10px] text-on-primary-container font-medium uppercase">Step 3/4</span>
+                                <div class="w-20 h-1 bg-surface-container mt-1 rounded-full overflow-hidden">
+                                    <div class="h-full bg-secondary w-3/4"></div>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-outline-variant group-hover:text-secondary group-hover:translate-x-1 transition-all" data-icon="chevron_right">chevron_right</span>
+                        </div>
+                    </div>
+
+                    <div onclick="showToast('Pipeline Context', 'Opening Social Media Campaign active agents...', 'account_tree')" class="bg-surface-container-lowest p-5 rounded-xl transition-all hover:bg-white flex items-center justify-between group cursor-pointer shadow-sm hover:shadow-md border border-transparent hover:border-outline-variant/30">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-tertiary-fixed-dim group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+                            </div>
+                            <div>
+                                <h4 class="font-body font-semibold text-on-surface">Social Media Campaign - EMEA</h4>
+                                <p class="text-[11px] font-medium text-on-primary-container uppercase tracking-wide">Drafting (Agent: Content Gen)</p>
+                            </div>
+                        </div>
+                            <div class="flex items-center gap-2">
+                            <div class="hidden md:flex flex-col items-end mr-4">
+                                <span class="text-[10px] text-on-primary-container font-medium uppercase">Step 1/5</span>
+                                <div class="w-20 h-1 bg-surface-container mt-1 rounded-full overflow-hidden">
+                                    <div class="h-full bg-secondary w-1/5"></div>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-outline-variant group-hover:text-secondary group-hover:translate-x-1 transition-all" data-icon="chevron_right">chevron_right</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-surface-container p-6 rounded-xl">
+                    <h3 class="font-headline text-lg text-on-surface mb-6">Recent Activity</h3>
+                    <div class="space-y-6 relative before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-0 before:w-0.5 before:bg-outline-variant/30">
+                        <div class="relative pl-8 group cursor-pointer hover:bg-white/50 p-1 -ml-1 rounded-lg transition-colors" onclick="showToast('Activity Details', 'Translation completed in French, German, Spanish, and Italian.', 'info')">
+                            <div class="absolute left-1 top-2 w-6 h-6 bg-surface-container-lowest rounded-full border-2 border-secondary flex items-center justify-center z-10 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-[12px] text-secondary" data-icon="translate">translate</span>
+                            </div>
+                            <p class="font-body text-xs text-on-surface leading-relaxed">
+                                <span class="font-bold">Agent X</span> completed localization into 4 languages for <span class="text-secondary font-medium italic">Global Retail Guide</span>.
+                            </p>
+                            <span class="text-[9px] font-label text-on-primary-container uppercase mt-1 block">2 MINS AGO</span>
+                        </div>
+                        
+                        <div class="relative pl-8 group cursor-pointer hover:bg-white/50 p-1 -ml-1 rounded-lg transition-colors" onclick="showToast('Compliance Log', 'All visuals passed brand safety and sentiment analysis.', 'info')">
+                            <div class="absolute left-1 top-2 w-6 h-6 bg-surface-container-lowest rounded-full border-2 border-on-tertiary-container flex items-center justify-center z-10 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-[12px] text-on-tertiary-container" data-icon="check_circle">check_circle</span>
+                            </div>
+                            <p class="font-body text-xs text-on-surface leading-relaxed">
+                                  Compliance pass <span class="text-on-tertiary-container font-bold">Approved</span> for Q3 Roadmap visuals.
+                            </p>
+                            <span class="text-[9px] font-label text-on-primary-container uppercase mt-1 block">14 MINS AGO</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="simulateLoading(this, 'VIEW ALL LOGS', 'Loading...', () => showToast('Logs System', 'Log viewer modal would open here.', 'terminal'))" class="w-full mt-8 py-3 text-[10px] font-label font-bold tracking-widest uppercase border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors flex justify-center items-center">
+                        VIEW ALL LOGS
+                    </button>
+                </div>
+            </div>
